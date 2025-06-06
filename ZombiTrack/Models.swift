@@ -27,10 +27,8 @@ final class Character {
     var createdAt: Date
     var updatedAt: Date
     
-    @Relationship(deleteRule: .cascade, inverse: \CharacterSkill.character)
-    var skills: [CharacterSkill] = []
-    @Relationship(deleteRule: .cascade, inverse: \GameCharacter.character)
-    var gameCharacters: [GameCharacter] = []
+    @Relationship(deleteRule: .cascade) var skills: [CharacterSkill] = []
+    @Relationship(deleteRule: .cascade) var gameCharacters: [GameCharacter] = []
     
     init(id: UUID = UUID(), name: String, life: Int, notes: String = "", isFavorite: Bool = false, createdAt: Date = Date(), updatedAt: Date = Date()) {
         self.id = id
@@ -49,8 +47,7 @@ final class Skill {
     var name: String
     var skillDesc: String
     
-    @Relationship(deleteRule: .cascade, inverse: \CharacterSkill.skill)
-    var characterSkills: [CharacterSkill] = []
+    @Relationship(deleteRule: .cascade) var characterSkills: [CharacterSkill] = []
     
     init(id: UUID = UUID(), name: String, skillDesc: String) {
         self.id = id
@@ -81,8 +78,7 @@ final class Action {
     @Attribute(.unique) var id: UUID
     var type: ActionType
     
-    @Relationship(deleteRule: .cascade, inverse: \GameActionLog.action)
-    var logs: [GameActionLog] = []
+    @Relationship(deleteRule: .cascade) var logs: [GameActionLog] = []
     
     init(id: UUID = UUID(), type: ActionType) {
         self.id = id
@@ -99,8 +95,7 @@ final class Game {
     var isFinished: Bool
     var notes: String
     
-    @Relationship(deleteRule: .cascade, inverse: \GameCharacter.game)
-    var characters: [GameCharacter] = []
+    @Relationship(deleteRule: .cascade) var characters: [GameCharacter] = []
     
     init(id: UUID = UUID(), name: String, startedAt: Date = Date(), endedAt: Date? = nil, isFinished: Bool = false, notes: String = "") {
         self.id = id
@@ -124,8 +119,7 @@ final class GameCharacter {
     var createdAt: Date
     var updatedAt: Date
     
-    @Relationship(deleteRule: .cascade, inverse: \GameActionLog.gameCharacter)
-    var logs: [GameActionLog] = []
+    @Relationship(deleteRule: .cascade) var logs: [GameActionLog] = []
     
     init(id: UUID = UUID(), game: Game? = nil, character: Character? = nil, startingXP: Int, currentXP: Int, lifeRemaining: Int, notes: String = "", createdAt: Date = Date(), updatedAt: Date = Date()) {
         self.id = id
