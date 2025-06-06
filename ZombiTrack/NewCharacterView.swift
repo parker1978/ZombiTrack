@@ -6,7 +6,7 @@ struct NewCharacterView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var name = ""
-    @State private var life = 2
+    @State private var life = 3
     @State private var notes = ""
     @State private var isFavorite = false
     @State private var showDetails = false
@@ -18,8 +18,8 @@ struct NewCharacterView: View {
                 TextField("Name", text: $name)
                     .textInputAutocapitalization(.words)
                 Toggle("Favorite", isOn: $isFavorite.animation())
+                Stepper("Life: \(life)", value: $life, in: 1...5)
                 DisclosureGroup(isExpanded: $showDetails.animation(.easeInOut)) {
-                    Stepper("Life: \(life)", value: $life, in: 1...5)
                     TextField("Notes", text: $notes)
                         .textFieldStyle(.roundedBorder)
                 } label: {

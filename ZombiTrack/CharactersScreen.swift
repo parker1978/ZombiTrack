@@ -9,7 +9,16 @@ import SwiftUI
 import SwiftData
 
 struct CharactersScreen: View {
-    @Query(sort: [SortDescriptor(\Character.isFavorite, order: .reverse), SortDescriptor(\Character.name)]) var characters: [Character]
+    @Query var allCharacters: [Character]
+
+    var characters: [Character] {
+        allCharacters.sorted {
+            if $0.isFavorite == $1.isFavorite {
+                return $0.name < $1.name
+            }
+            return $0.isFavorite && !$1.isFavorite
+        }
+    }
 
     @State private var searchText = ""
 
