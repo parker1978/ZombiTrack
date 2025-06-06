@@ -1,10 +1,3 @@
-//
-//  ZombiTrackApp.swift
-//  ZombiTrack
-//
-//  Created by Stephen Parker on 6/6/25.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -12,10 +5,15 @@ import SwiftData
 struct ZombiTrackApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Character.self,
+            CharacterXP.self,
+            Skill.self,
+            CharacterSkill.self,
+            Action.self,
+            CharacterAction.self,
+            ActionLog.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
