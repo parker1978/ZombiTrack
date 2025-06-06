@@ -6,12 +6,12 @@ struct ZombiTrackApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Character.self,
-            CharacterXP.self,
             Skill.self,
             CharacterSkill.self,
             Action.self,
-            CharacterAction.self,
-            ActionLog.self,
+            Game.self,
+            GameCharacter.self,
+            GameActionLog.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         do {
